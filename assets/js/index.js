@@ -21,7 +21,6 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animals.js";
   const btnRegistrarElement = document.getElementById("btnRegistrar");
   const animalesContainerElement = document.getElementById("Animales");
   const playerElement = document.getElementById("player");
-  const modalElement = document.getElementById("Modal");
 
   const AnimalCards = []; // Arreglo según el botón registro
 
@@ -36,7 +35,16 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animals.js";
       DIVContainer.style.width = "200px";
 
       IMGImagen.setAttribute("src", `assets/imgs/${animal.Img}`);
-      IMGImagen.classList.add("img-fluid");
+      IMGImagen.classList.add("img-fluid", "animal-image");
+      IMGImagen.addEventListener("click", () => {
+        $("#modal").modal("show");
+        console.log(animal);
+        const modalBody = document.getElementById("modal-body");
+        modalBody.innerHTML = `<img src="./assets/imgs/${animal.Img}" style="width: 500px" class="img-fluid"/>
+        <center><b>Animal: </b>${animal.Nombre}</center>
+        <center><b>Edad: </b>${animal.Edad}</center>
+        <center><b>Comentarios: </b>${animal.Comentarios}</center>`;
+      });
 
       ButtonSonido.classList.add("card-body", "p-0");
       ButtonSonido.innerHTML = `<img src="./assets/imgs/audio.svg" style="width: 30px"/>`;

@@ -55,3 +55,7 @@ body {
 .card .card-body {
   border: none;
 }
+
+.animal-image {
+  cursor: pointer;
+}
