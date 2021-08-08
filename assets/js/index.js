@@ -95,38 +95,68 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animals.js";
     let nombreAnimal = nombreAnimalElement.value;
     let edadAnimal = edadAnimalElement.value;
     let comentariosAnimal = comentariosAnimalElement.value;
+    console.log(comentariosAnimal);
+    console.log(comentariosAnimal.length);
 
-    const animalEncontrado = Animales.find(
-      (animal) => animal.name === nombreAnimal
-    );
+    /*
+     * Verificando que se agreguen todos los datos
+     */
+    ((verificar) => {
+      if (
+        comentariosAnimal.length === 0 ||
+        nombreAnimal == "Seleccione un animal" ||
+        edadAnimal == "Seleccione un rango de años"
+      ) {
+        alert("Debes completar toda la información");
+      } else {
+        const animalEncontrado = Animales.find(
+          (animal) => animal.name === nombreAnimal
+        );
 
-    const params = [
-      nombreAnimal,
-      edadAnimal,
-      animalEncontrado.imagen,
-      comentariosAnimal,
-      animalEncontrado.sonido,
-    ];
+        const params = [
+          nombreAnimal,
+          edadAnimal,
+          animalEncontrado.imagen,
+          comentariosAnimal,
+          animalEncontrado.sonido,
+        ];
 
-    switch (nombreAnimal) {
-      case "Leon":
-        AnimalCards.push(new Leon(...params));
-        break;
-      case "Lobo":
-        AnimalCards.push(new Lobo(...params));
-        break;
-      case "Oso":
-        AnimalCards.push(new Oso(...params));
-        break;
-      case "Aguila":
-        AnimalCards.push(new Aguila(...params));
-        break;
-      case "Serpiente":
-        AnimalCards.push(new Serpiente(...params));
-        break;
-    }
+        switch (nombreAnimal) {
+          case "Leon":
+            AnimalCards.push(new Leon(...params));
+            break;
+          case "Lobo":
+            AnimalCards.push(new Lobo(...params));
+            break;
+          case "Oso":
+            AnimalCards.push(new Oso(...params));
+            break;
+          case "Aguila":
+            AnimalCards.push(new Aguila(...params));
+            break;
+          case "Serpiente":
+            AnimalCards.push(new Serpiente(...params));
+            break;
+        }
 
-    console.log(AnimalCards);
-    render();
+        ////////////////////////////////////////////////
+        /*
+         * Devolver el formulario a su estado inicial
+         */
+
+        let options = document.querySelectorAll("option");
+        options.forEach((option) => (option.selected = option.defaultSelected));
+
+        // for (var i = 0, l = options.length; i < l; i++) {
+        //   options[i].selected = options[i].defaultSelected;
+        // }
+
+        $("#comentarios").val("");
+        previewAnimalElement.removeAttribute("src");
+
+        console.log(AnimalCards);
+        render();
+      }
+    })();
   });
 })();
